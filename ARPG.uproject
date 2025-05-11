@@ -10,7 +10,8 @@
 			"LoadingPhase": "Default",
 			"AdditionalDependencies": [
 				"Engine",
-				"EnhancedInput"
+				"EnhancedInput",
+				"GameplayAbilities"
 			]
 		}
 	],
@@ -30,6 +31,10 @@
 		{
 			"Name": "Fab",
 			"Enabled": false
+		},
+		{
+			"Name": "GameplayAbilities",
+			"Enabled": true
 		}
 	]
 }

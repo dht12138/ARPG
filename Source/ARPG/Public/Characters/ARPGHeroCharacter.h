@@ -9,6 +9,8 @@
 
 class USpringArmComponent;
 class UCameraComponent;
+class UDataAsset_InputConfig;
+struct FInputActionValue;
 
 /**
  * 
@@ -22,6 +24,12 @@ public:
 	AARPGHeroCharacter();
 
 protected:
+	//~ Begin APawn Interface.
+	virtual void PossessedBy(AController* NewController) override;
+	//~ End APawn Interface
+
+	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+
 	virtual void BeginPlay() override;
 
 private:
@@ -32,6 +40,16 @@ private:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Camera", meta = (AllowPrivateAccess = "ture"))
 	UCameraComponent* FollowCamera;
+
+
+#pragma endregion
+
+#pragma region Inputs
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "CharacterData", meta = (AllowPrivateAccess = "ture"))
+	UDataAsset_InputConfig* InputConfigDA;
+
+	void Input_Move(const FInputActionValue& InputActionVal);
+	void Input_Look(const FInputActionValue& InputActionVal);
 
 
 #pragma endregion

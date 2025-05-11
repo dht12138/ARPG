@@ -4,10 +4,14 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
+#include "AbilitySystemInterface.h"
 #include "ARPGBaseCharacter.generated.h"
 
+class UArpgAbilitySystemComponent;
+class UArpgAttributeSet;
+
 UCLASS()
-class ARPG_API AARPGBaseCharacter : public ACharacter
+class ARPG_API AARPGBaseCharacter : public ACharacter, public IAbilitySystemInterface
 {
 	GENERATED_BODY()
 
@@ -15,6 +19,29 @@ public:
 	// Sets default values for this character's properties
 	AARPGBaseCharacter();
 
+	//~ Begin IAbilitySystemInterface Interface.
+	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const;
+	//~ End IAbilitySystemInterface Interface
 
+protected:
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "AbilitySystem")
+	UArpgAbilitySystemComponent* ArpgAbilitySystemComp;
 
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "AbilitySystem")
+	UArpgAttributeSet* ArpgAttributeSet;
+
+	//~ Begin APawn Interface.
+	virtual void PossessedBy(AController* NewController) override;
+	//~ End APawn Interface
+
+public:
+	FORCEINLINE UArpgAbilitySystemComponent* GetArpgAbilitySystemComponent() const
+	{
+		return ArpgAbilitySystemComp;
+	}
+
+	FORCEINLINE UArpgAttributeSet* GetArpgAttributeSet() const
+	{
+		return ArpgAttributeSet;
+	}
 };
