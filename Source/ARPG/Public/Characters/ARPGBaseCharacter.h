@@ -9,6 +9,7 @@
 
 class UArpgAbilitySystemComponent;
 class UArpgAttributeSet;
+class UDataAsset_StartUpDataBasee;
 
 UCLASS()
 class ARPG_API AARPGBaseCharacter : public ACharacter, public IAbilitySystemInterface
@@ -20,7 +21,7 @@ public:
 	AARPGBaseCharacter();
 
 	//~ Begin IAbilitySystemInterface Interface.
-	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const;
+	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
 	//~ End IAbilitySystemInterface Interface
 
 protected:
@@ -29,6 +30,9 @@ protected:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "AbilitySystem")
 	UArpgAttributeSet* ArpgAttributeSet;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "CharacterData")
+	TSoftObjectPtr<UDataAsset_StartUpDataBasee> CharacterStartUpData;
 
 	//~ Begin APawn Interface.
 	virtual void PossessedBy(AController* NewController) override;

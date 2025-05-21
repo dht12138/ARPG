@@ -11,6 +11,7 @@
 #include "Components/Input/ARPGInputComponent.h"
 #include "ARPGGameplayTags.h"
 #include "AbilitySystem/ArpgAbilitySystemComponent.h"
+#include "DataAssets/StartUpDatta/DataAsset_StartUpDataBasee.h"
 
 #include "ARPGDebugHelper.h"
 
@@ -43,13 +44,22 @@ void AARPGHeroCharacter::PossessedBy(AController* NewController)
 {
 	Super::PossessedBy(NewController);
 
-	if (ArpgAbilitySystemComp && ArpgAttributeSet)
+	/*if (ArpgAbilitySystemComp && ArpgAttributeSet)
 	{
 		const FString ASCTEST = FString::Printf(TEXT("Owner actor : %s, Avatar actor : %s"),
 			*ArpgAbilitySystemComp->GetOwnerActor()->GetActorLabel(), 
 			*ArpgAbilitySystemComp->GetAvatarActor()->GetActorLabel());
 		Debug::Print(TEXT("Ability system component valid.") + ASCTEST, FColor::Green);
 		Debug::Print(TEXT("AttributeSet valid."), FColor::Green);
+	}*/
+
+	if (!CharacterStartUpData.IsNull())
+	{
+		if (UDataAsset_StartUpDataBasee* LoadedData = CharacterStartUpData.LoadSynchronous())
+		{
+			LoadedData->GiveToAbilitySystemComponent(ArpgAbilitySystemComp);
+			//将DataAsset的技能添加到ASC
+		}
 	}
 
 }

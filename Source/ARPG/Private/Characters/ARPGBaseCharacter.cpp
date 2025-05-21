@@ -37,6 +37,9 @@ void AARPGBaseCharacter::PossessedBy(AController* NewController)
 		/*	OwnerActor：处理网络权限和逻辑归属（如技能冷却、资源消耗）。
 			示例：PlayerState 作为 Owner 可防止角色销毁后技能状态丢失。
 			AvatarActor：处理视觉效果和世界交互（如命中检测、粒子特效）。*/
+
+		//触发断点
+		ensureMsgf(!CharacterStartUpData.IsNull(), TEXT("StartUp DataAsset Is NULL : %s"), *GetName());
 	}
 }
 
