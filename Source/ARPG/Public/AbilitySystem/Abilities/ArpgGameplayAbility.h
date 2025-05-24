@@ -6,6 +6,8 @@
 #include "Abilities/GameplayAbility.h"
 #include "ArpgGameplayAbility.generated.h"
 
+class UPawnCombatComponent;
+
 UENUM(BlueprintType)
 enum class EArpgAbilityActivationPolicy : uint8
 {
@@ -29,7 +31,9 @@ protected:
 		bool bReplicateEndAbility, bool bWasCancelled) override;
 	//~ End UGameplayAbility Interface
 
-	UPROPERTY(EditDefaultsOnly, Category = "ArpgAbility")
+	UPROPERTY(EditDefaultsOnly, Category = "Arpg|Ability")
 	EArpgAbilityActivationPolicy AbilityActivationPolicy = EArpgAbilityActivationPolicy::OnTriggered;
 
+	UFUNCTION(BlueprintPure, Category = "Arpg|Ability")
+	UPawnCombatComponent* GetPawnCombatCompFromActorInfo() const;
 };
