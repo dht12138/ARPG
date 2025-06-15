@@ -40,3 +40,8 @@ UPawnCombatComponent* UArpgGameplayAbility::GetPawnCombatCompFromActorInfo() con
 	return GetAvatarActorFromActorInfo()->FindComponentByClass<UPawnCombatComponent>();
 
 }
+
+UArpgAbilitySystemComponent* UArpgGameplayAbility::GetArpgAbilitySystemCompFromActorInfo() const
+{
+	return Cast<UArpgAbilitySystemComponent>(CurrentActorInfo->AbilitySystemComponent);
+}

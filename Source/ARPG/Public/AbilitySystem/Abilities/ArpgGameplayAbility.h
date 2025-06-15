@@ -7,6 +7,7 @@
 #include "ArpgGameplayAbility.generated.h"
 
 class UPawnCombatComponent;
+class UArpgAbilitySystemComponent;
 
 UENUM(BlueprintType)
 enum class EArpgAbilityActivationPolicy : uint8
@@ -36,4 +37,8 @@ protected:
 
 	UFUNCTION(BlueprintPure, Category = "Arpg|Ability")
 	UPawnCombatComponent* GetPawnCombatCompFromActorInfo() const;
+	
+	UFUNCTION(BlueprintPure, Category = "Arpg|Ability")
+	UArpgAbilitySystemComponent* GetArpgAbilitySystemCompFromActorInfo() const;
+
 };

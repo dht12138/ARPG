@@ -29,7 +29,10 @@ public:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
 	UInputAction* InputAction;
 
-
+	bool IsValid() const
+	{
+		return InputTag.IsValid() && InputAction;
+	}
 };
 
 /**
@@ -51,6 +54,9 @@ public:
 	默认情况下，编辑器会直接显示该结构体或类的类型名（例如 FARPGInputActionConfig）。这种显示方式不够直观，
 	尤其是在结构体包含多个属性时，无法快速识别每个元素的内容。
 		通过 TitleProperty，可以指定一个属性作为该结构体或类的“标题”，让编辑器用这个属性的值替代默认的类型名。*/
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, meta = ( TitleProperty = "InputTag"))
+	TArray<FARPGInputActionConfig> AbilityInputActions;
 
 	UInputAction* FindNativeInputActionByTag(const FGameplayTag& InInputTag) const;
 
